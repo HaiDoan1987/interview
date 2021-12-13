@@ -77,7 +77,7 @@ public class FeatureTestSuite {
 
         // wait for errorMessage message
 
-        WebElement message = driver.findElement(By.id("loginSuccessFully"));
+        WebElement message = driver.findElement(By.id("error"));
 
         Assert.assertEquals(message.getText(), ExpectErrorMessage);
     }
