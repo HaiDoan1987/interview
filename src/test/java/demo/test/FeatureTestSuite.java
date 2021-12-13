@@ -15,6 +15,8 @@ public class FeatureTestSuite {
 
     String ExpectLoginSucessfully = "This is test message";
 
+    String ExpectErrorMessage = "This is test message";
+
     @BeforeTest
     public void setThingUp() throws InterruptedException {
         driver = new ChromeDriver();
@@ -51,4 +53,32 @@ public class FeatureTestSuite {
         Assert.assertEquals(message.getText(), ExpectLoginSucessfully);
     }
 
+    @Test
+    public  void secondTest() throws InterruptedException {
+        Thread.sleep(5000);
+
+        WebElement UserNameField = driver.findElement(By.id("userName"));
+
+        //filling userName
+        UserNameField.sendKeys("Test@test.com");
+
+        WebElement UserPasswordField = driver.findElement(By.id("password"));
+
+        UserNameField.sendKeys("InvalidPassword");
+
+        // wait for login button to be enabled
+        Thread.sleep(5000);
+
+        WebElement loginButton = driver.findElement(By.id("loginBtn"));
+
+        loginButton.click();
+
+        Thread.sleep(2000);
+
+        // wait for errorMessage message
+
+        WebElement message = driver.findElement(By.id("loginSuccessFully"));
+
+        Assert.assertEquals(message.getText(), ExpectErrorMessage);
+    }
 }
